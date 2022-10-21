@@ -4,7 +4,12 @@ import OnlyLoggedInCanSee from "@/OnlyLoggedInCanSee.vue"
 
 const routes = [
   { path: '/', component: EverybodyCanSee },
-  { path: '/locked', component: OnlyLoggedInCanSee },
+  { path: '/locked', 
+    component: OnlyLoggedInCanSee,
+    beforeEnter: (to, from) => {
+      return '/'
+    },
+  },
 ]
 
 const router = createRouter({
