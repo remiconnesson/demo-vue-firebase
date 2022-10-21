@@ -1,20 +1,28 @@
 <script setup>
-import { initializeApp } from "firebase/app";
+import { auth, uid, loginPopup } from "@/auth"
+import { onAuthStateChanged } from "firebase/auth"
+import { useRouter } from "vue-router"
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBlg_1iHV3llX_Ky2qAPYZYVcCuxC9sOD4",
-  authDomain: "web-2022-c850d.firebaseapp.com",
-  projectId: "web-2022-c850d",
-  storageBucket: "web-2022-c850d.appspot.com",
-  messagingSenderId: "505208230679",
-  appId: "1:505208230679:web:6894ed3628b6c3b28c9d52"
-};
+const router = useRouter()
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+  } else {
+    // redirect user to home page on logout
+    router.push('/')
+  }
+})
 
 </script>
 
 <template>
-  <h1>Hello, World!</h1>
+  <h1>Hello App!</h1>
+  <p>{{ uid }}</p>
+  <button v-if="uid" @click="auth.signOut">Log Out</button>
+  <button v-else @click="loginPopup">Log In</button>
+  <ul>
+    <li><router-link to="/">Everybody Can See</router-link></li>
+    <li><router-link to="/locked">Only Logged In Can See</router-link></li>
+  </ul>
+  <router-view></router-view>
 </template>
