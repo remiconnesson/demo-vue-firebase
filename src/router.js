@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
+import { uid } from "@/auth"
 import EverybodyCanSee from "@/EverybodyCanSee.vue"
 import OnlyLoggedInCanSee from "@/OnlyLoggedInCanSee.vue"
 
@@ -7,7 +8,10 @@ const routes = [
   { path: '/locked', 
     component: OnlyLoggedInCanSee,
     beforeEnter: (to, from) => {
-      return '/'
+      // block access if user is not logged in
+      if (!uid.value) {
+        return '/'
+      }
     },
   },
 ]
