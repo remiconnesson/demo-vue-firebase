@@ -1,5 +1,18 @@
 <script setup>
 import { auth, uid, loginPopup } from "@/auth"
+import { onAuthStateChanged } from "firebase/auth"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+  } else {
+    // redirect user to home page on logout
+    router.push('/')
+  }
+})
+
 </script>
 
 <template>
