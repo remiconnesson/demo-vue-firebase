@@ -16,5 +16,10 @@ const app = initializeApp(firebaseConfig);
 </script>
 
 <template>
-  <h1>Hello, World!</h1>
+  <h1>Hello App!</h1>
+  <ul>
+    <li><router-link to="/">Everybody Can See</router-link></li>
+    <li><router-link to="/locked">Only Logged In Can See</router-link></li>
+  </ul>
+  <router-view></router-view>
 </template>
